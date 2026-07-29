@@ -28,11 +28,28 @@ pokeApi.getDescription = (dataDescription) => {
     const description = descriptionEntry ? descriptionEntry.flavor_text.replace(/\n|\f/g, " ") : "Description not found."
     return description
 }
+function convertEvolutionToList(evolutionData) {
+    const evolutions = []
+
+    function readEvolution(start) {
+        evolutions.push(start.species.name)
+
+        start.evolves_to.forEach((nextEvolution) => {
+            readEvolution(nextEvolution)
+        })
+    }
+
+    readEvolution(evolutionData.chain)
+
+    return evolutions
+}
 pokeApi.getEvolutions = (evolutionsUrl) => {
     return fetch(evolutionsUrl)
-        .then(evolutionsData => evolutionsData.json())
-        
-    
+        .then(evolutionsJson => evolutionsJson.json())
+        .then((evolutionsData) => {
+            const evolutions = convertEvolutionToList(evolutionsData)
+            return evolutions
+        })
 }
 
 
