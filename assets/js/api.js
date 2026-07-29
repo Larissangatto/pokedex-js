@@ -20,7 +20,8 @@ function pokemonDetails(details) {
     pokemon.height = details.height
     pokemon.weight = details.weight
     pokemon.baseXP = details.base_experience
-
+    const abilities = details.abilities.map((slot) => slot.ability.name)
+    pokemon.abilities = abilities
     return pokemon
 }
 
