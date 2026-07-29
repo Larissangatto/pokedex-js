@@ -88,7 +88,7 @@
 .description { grid-area: description; }
 .stats { grid-area: stats; }
 .info { grid-area: info; }
-.abilits { grid-area: abilities; }
+.abilities { grid-area: abilities; }
 .evolution { grid-area: evolution; }
 
 .description{
@@ -198,7 +198,7 @@
         font-size: 0.85rem;
     }
     
-    .info p, .abilits p {
+    .info p, .abilities p {
         margin: 0.2rem 0;
     }
 }
