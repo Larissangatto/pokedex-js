@@ -1,5 +1,36 @@
 const pokeApi = {}
+function pokemonDetails(details) {
+    const pokemon = new Pokemon
 
+    pokemon.name = details.name
+    pokemon.number = details.id 
+    const types = details.types.map((typeSlot)=>typeSlot.type.name)
+    const type = types[0]
+    pokemon.type = type
+    pokemon.types = types
+    pokemon.speciesUrl = details.species.url
+    pokemon.photo = details.sprites.other.dream_world.front_default
+    const stats = details.stats.map((statSlot) => {
+        return {
+            name: statSlot.stat.name,
+            value: statSlot.base_stat           
+        }
+    })
+    pokemon.stats = stats
+    pokemon.height = details.height
+    pokemon.weight = details.weight
+    pokemon.baseXP = details.base_experience
+
+    return pokemon
+}
+
+function pokemonComplete(pokemon,  description, evolutions) {
+    pokemon.description = description
+    pokemon.evolutions = evolutions
+
+    return pokemon
+
+}
 pokeApi.getPokemons = (offset = 0, limit = 5) => {
     const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`
     return fetch(url)
@@ -7,13 +38,13 @@ pokeApi.getPokemons = (offset = 0, limit = 5) => {
         .then((response) => response.results)
         
 }
-pokeApi.getDetailsPokedex = (pokedex) => {
-    return fetch(pokedex.url)
+pokeApi.getDetailsPokedex = (details) => {
+    return fetch(details.url)
         .then((response) => response.json())
 }
 
-pokeApi.getSpeciesData = (pokeSpecies) => {
-    return fetch(pokeSpecies.species.url)
+pokeApi.getSpeciesData = (speciesUrl) => {
+    return fetch(speciesUrl)
         .then((dataSpecies) => dataSpecies.json())
         .then((data) => {
             return {
@@ -52,4 +83,20 @@ pokeApi.getEvolutions = (evolutionsUrl) => {
         })
 }
 
-
+pokeApi.getPokemonDetails = (pokemon) => {
+    return pokeApi.getDetailsPokedex(pokemon)
+        .then((details) => {
+            return pokemonDetails(details)
+        
+    })
+}
+pokeApi.getPokemonComplete = (pokemon) => {
+    return pokeApi.getSpeciesData(pokemon.speciesUrl)
+        .then((speciesData) => {
+            const description = pokeApi.getDescription(speciesData.dataDescription)
+            return pokeApi.getEvolutions(speciesData.evolutionsUrl)
+                .then((evolutions) => {
+                    return pokemonComplete(pokemon,description,evolutions)
+                })
+        })
+}
