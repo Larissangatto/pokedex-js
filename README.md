@@ -9,7 +9,7 @@ Aplicação de Pokédex desenvolvida com JavaScript, consumindo dados da PokéAP
 
 Access the application here: **[Pokédex JS](https://larissangatto.github.io/pokedex-js/)**
 
-Acesse a aplicação aqui: **[Pokédex JS]([SEU_LINK_AQUI](https://larissangatto.github.io/pokedex-js/))**
+Acesse a aplicação aqui: **[Pokédex JS]((https://larissangatto.github.io/pokedex-js/))**
 
 ---
 
