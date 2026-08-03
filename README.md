@@ -1,7 +1,7 @@
 # 📝 Pokédex JS
 
-A Pokédex application developed with JavaScript, consuming data from the PokéAPI to display Pokémon information in a dynamic and interactive interface.
-Aplicação de Pokédex desenvolvida com JavaScript, consumindo dados da PokéAPI para exibir informações dos Pokémon de forma dinâmica e interativa.
+A Pokédex application developed with JavaScript, consuming data from the PokéAPI to display Pokémons information in a dynamic and interactive interface.
+Pokédex desenvolvida com JavaScript, consumindo dados da PokéAPI para exibir informações dos Pokémons de forma dinâmica e interativa.
 
 ---
 
